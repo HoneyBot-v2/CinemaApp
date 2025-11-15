@@ -2,6 +2,5 @@
   <Project Path="src/Cinema.MAUI/Cinema.MAUI.csproj">
     <Deploy />
   </Project>
+  <Project Path="src/Cinema.API/Cinema.API.csproj"/>
 </Solution>
-
-
