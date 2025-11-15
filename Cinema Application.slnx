@@ -1,5 +1,7 @@
-<Solution>
-  <Project Path="Cinema Application/Cinema Application.csproj">
+﻿<Solution>
+  <Project Path="src/Cinema.MAUI/Cinema.MAUI.csproj">
     <Deploy />
   </Project>
 </Solution>
+
+
