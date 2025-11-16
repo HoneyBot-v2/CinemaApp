@@ -10,7 +10,6 @@ namespace CinemaTicketApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-
     public class ScreeningsController : ControllerBase
     {
         private readonly ApiDbContext dbContext;
@@ -46,7 +45,6 @@ namespace CinemaTicketApi.Controllers
             int seatsPerRow = 9;
             int totalSeats = 81;
             int totalRows = (int)Math.Ceiling((double)totalSeats / seatsPerRow);
-
             var newSeats = new List<Seat>();
 
             for (int row = 0; row < totalRows; row++) // Start from 0 to use ASCII values
@@ -74,7 +72,6 @@ namespace CinemaTicketApi.Controllers
             dbContext.SaveChanges();
         }
 
-
         // DELETE: api/Screening/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteScreening(int id)
@@ -88,6 +85,5 @@ namespace CinemaTicketApi.Controllers
             await dbContext.SaveChangesAsync();
             return NoContent();
         }
-
     }
 }

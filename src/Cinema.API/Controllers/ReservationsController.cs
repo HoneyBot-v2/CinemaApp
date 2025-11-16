@@ -9,7 +9,6 @@ namespace CinemaTicketApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-
     public class ReservationsController : ControllerBase
     {
         private readonly ApiDbContext dbContext;
@@ -78,7 +77,6 @@ namespace CinemaTicketApi.Controllers
                     .Where(s => seatIds.Contains(s.Id) && s.IsAvailable && s.ScreeningId == screeningId)
                     .ToList();
 
-
                 // Check if the number of seats fetched matches the number of seat IDs provided
                 if (seats.Count != seatIds.Count)
                 {
@@ -120,7 +118,6 @@ namespace CinemaTicketApi.Controllers
 
                 // Return the custom response
                 return Ok(response);
-
             }
             catch
             {

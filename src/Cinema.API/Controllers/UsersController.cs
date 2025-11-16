@@ -59,20 +59,20 @@ namespace CinemaTicketApi.Controllers
             });
         }
 
-
         // Register User
         [HttpPost("register")]
         public IActionResult Register([FromBody]User user)
         {
             var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
+
             if (userExists != null)
             {
                 return BadRequest("User with same email already exists");
             }
+            
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);
         }
-
     }
 }

@@ -7,7 +7,6 @@
         public int PricePerSeat { get; set; }   
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
-
         public ICollection<Seat> Seats { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }

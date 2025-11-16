@@ -8,12 +8,9 @@ namespace CinemaTicketApi.Models
     public class ReservationSeat
     {
         public int ReservationId { get; set; }
-
         [ForeignKey("ReservationId")]
-        public Reservation Reservation { get; set; }
-     
+        public Reservation Reservation { get; set; }     
         public int SeatId { get; set; }
-
         [ForeignKey("SeatId")]
         public Seat Seat { get; set; }
     }

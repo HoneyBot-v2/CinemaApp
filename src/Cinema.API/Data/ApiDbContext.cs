@@ -17,8 +17,6 @@ namespace CinemaTicketApi.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationSeat> ReservationSeats { get; set; }
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Seed data for Users
@@ -199,8 +197,6 @@ namespace CinemaTicketApi.Data
             // Generate and Seed Seats
             var seats = GenerateSeatsForSeededScreenings(screenings.Select(s => s.Id).ToArray());
             modelBuilder.Entity<Seat>().HasData(seats);
-
-
         }
 
         // Method to Generate Seats for All Screenings During Seeding
@@ -238,5 +234,4 @@ namespace CinemaTicketApi.Data
             return allSeats;
         }
     }
-
 }

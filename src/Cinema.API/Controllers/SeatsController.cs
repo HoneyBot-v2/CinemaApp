@@ -29,7 +29,6 @@ namespace CinemaTicketApi.Controllers
                        .Select(s => new { s.Id, s.Row, s.SeatNumber, s.IsAvailable }) // Include only desired properties
                        .ToListAsync();
             return Ok(seats);
-        }
-    
+        }    
     }
 }

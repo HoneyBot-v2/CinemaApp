@@ -10,7 +10,6 @@ namespace CinemaTicketApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-
     public class MoviesController : ControllerBase
     {
         private readonly ApiDbContext dbContext;
@@ -25,9 +24,8 @@ namespace CinemaTicketApi.Controllers
         public async Task<ActionResult<object>> GetAllMovies(string movieType)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-
-
             var moviesQuery = dbContext.Movies.AsQueryable();
+
             if (movieType == "nowplaying")
             {
                 moviesQuery = moviesQuery.Where(m => m.Type == "nowplaying");
@@ -63,7 +61,6 @@ namespace CinemaTicketApi.Controllers
         public async Task<ActionResult> GetMovie(int id)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-
             var movie = await dbContext.Movies
                 .Where(m => m.Id == id)
                 .Select(m => new
@@ -119,6 +116,5 @@ namespace CinemaTicketApi.Controllers
 
             return NoContent();
         }
-
     }
 }
