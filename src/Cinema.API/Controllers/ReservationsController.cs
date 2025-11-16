@@ -32,14 +32,13 @@ namespace CinemaTicketApi.Controllers
         public IActionResult GetReservationByUserId(int userId)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-
             var reservations = dbContext.Reservations
-                                       .Where(r => r.UserId == userId)
-                                       .Include(r => r.ReservationSeats)
-                                       .ThenInclude(rs => rs.Seat)
-                                       .Include(r => r.Screening)
-                                       .ThenInclude(s => s.Movie)
-                                       .ToList();
+                .Where(r => r.UserId == userId)
+                .Include(r => r.ReservationSeats)
+                .ThenInclude(rs => rs.Seat)
+                .Include(r => r.Screening)
+                .ThenInclude(s => s.Movie)
+                .ToList();
 
 
             // Transform the reservations into the new DTO format
@@ -57,23 +56,18 @@ namespace CinemaTicketApi.Controllers
             }).ToList();
 
             return Ok(response);
-
-            // return Ok(reservations);
         }
-
-
 
         /// Query Parameters: Use URL format with ?userId=1&screeningId=2&seatIds=3&seatIds=4&seatIds=5.
         // Form Data: Use "x-www-form-urlencoded" format in Postman.
         // JSON: For JSON data, you should update the method to accept a DTO and use[FromBody] to bind the JSON payload.
-
         [HttpGet("reserve")]
         public IActionResult ReserveSeats([FromQuery] int userId, [FromQuery] int screeningId, [FromQuery] List<int> seatIds)
         {
             try
             {
                 // Fetch the screening to get the price per seat
-                var screening = dbContext.Screenings.Include(s => s.Movie).FirstOrDefault(s => s.Id == screeningId);
+                Screening? screening = dbContext.Screenings.Include(s => s.Movie).FirstOrDefault(s => s.Id == screeningId);
                 if (screening == null)
                 {
                     return NotFound("Screening not found.");

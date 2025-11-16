@@ -99,7 +99,7 @@ namespace CinemaTicketApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
-            var movie = await dbContext.Movies
+            Movie? movie = await dbContext.Movies
                 .Include(m => m.Screenings) // Include related screenings
                 .FirstOrDefaultAsync(m => m.Id == id);
 

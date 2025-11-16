@@ -24,7 +24,7 @@ namespace CinemaTicketApi.Controllers
         [HttpGet("by-movie/{movieId}")]
         public async Task<ActionResult> GetScreeningByMovieId(int movieId)
         {
-            var screening = await dbContext.Screenings.Where(s => s.MovieId == movieId).ToListAsync();
+            List<Screening> screening = await dbContext.Screenings.Where(s => s.MovieId == movieId).ToListAsync();
             return Ok(screening);
         }
 
@@ -36,8 +36,8 @@ namespace CinemaTicketApi.Controllers
             await dbContext.SaveChangesAsync();
 
             // Generate Seats For This Screening
-
             GenerateSeatsForScreening(screening.Id);
+
             return StatusCode(StatusCodes.Status201Created);
         }
 

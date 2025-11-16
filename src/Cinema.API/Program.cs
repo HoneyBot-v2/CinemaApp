@@ -39,7 +39,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Serve OpenAPI JSON and Scalar UI
 app.MapOpenApi(); // GET /openapi/v1.json
