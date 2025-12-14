@@ -4,7 +4,8 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "scalar",
-      "dotnetRunMessages": true
+      "dotnetRunMessages": true,
+      "applicationUrl": "http://localhost:5000"
     },
     "IIS Express": {
       "commandName": "IISExpress",
