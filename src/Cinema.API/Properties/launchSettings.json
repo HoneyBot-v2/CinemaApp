@@ -10,7 +10,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "scalar"
+      "launchUrl": "swagger"
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
