@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SQLitePCL;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -93,21 +95,21 @@ builder.Services.AddHealthChecks()
 WebApplication app = builder.Build();
 
 // Swagger UI
-if (app.Environment.IsDevelopment())
+#if DEBUG
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Cinema API v1");
-        options.RoutePrefix = "swagger";
-    });
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Cinema API v1");
+    options.RoutePrefix = "swagger";
+});
+
+#endif
 
 // Health check endpoint
 app.MapHealthChecks("/healthz")
-    .WithName("HealthCheck")
-    .WithTags("Health")
-    .WithOpenApi();
+    .WithName("GetHealth")
+    .WithTags("Health");
 
 #if DEBUG
 // Debug only authentication bypass
