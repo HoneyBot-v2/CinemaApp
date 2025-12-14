@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace CinemaTicketApi.Models
+namespace Cinema.API.Models
 {
     public class Seat
     {
         public int Id { get; set; }
         public string Row { get; set; }
-        public int SeatNumber { get; set; } 
+        public int SeatNumber { get; set; }
         public bool IsAvailable { get; set; }
         [ForeignKey("ScreeningId")]
         public int ScreeningId { get; set; }

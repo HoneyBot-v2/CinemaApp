@@ -1,10 +1,10 @@
-﻿using CinemaTicketApi.Data;
-using CinemaTicketApi.Models;
+using Cinema.API.Data;
+using Cinema.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaTicketApi.Controllers
+namespace Cinema.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -98,7 +98,7 @@ namespace CinemaTicketApi.Controllers
                     ReservationSeats = seats.Select(s => new ReservationSeat { SeatId = s.Id }).ToList()
                 };
 
-                // Mark each seat as unavailable 
+                // Mark each seat as unavailable
                 foreach (var seat in seats)
                 {
                     seat.IsAvailable = false;

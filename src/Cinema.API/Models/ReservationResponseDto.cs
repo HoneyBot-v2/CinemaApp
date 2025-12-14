@@ -1,4 +1,4 @@
-﻿namespace CinemaTicketApi.Models
+namespace Cinema.API.Models
 {
     public class ReservationResponseDto
     {
@@ -10,6 +10,6 @@
         public int ScreeningId { get; set; }
         public string MovieTitle { get; set; }
         public string MovieImageUrl { get; set; }
-        public string SeatNumbers { get; set; } 
+        public string SeatNumbers { get; set; }
     }
 }

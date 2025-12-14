@@ -1,11 +1,11 @@
-﻿using CinemaTicketApi.Data;
-using CinemaTicketApi.Models;
+using Cinema.API.Data;
+using Cinema.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaTicketApi.Controllers
+namespace Cinema.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,6 +29,6 @@ namespace CinemaTicketApi.Controllers
                        .Select(s => new { s.Id, s.Row, s.SeatNumber, s.IsAvailable }) // Include only desired properties
                        .ToListAsync();
             return Ok(seats);
-        }    
+        }
     }
 }

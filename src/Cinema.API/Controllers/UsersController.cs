@@ -1,5 +1,5 @@
-﻿using CinemaTicketApi.Data;
-using CinemaTicketApi.Models;
+using Cinema.API.Data;
+using Cinema.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace CinemaTicketApi.Controllers
+namespace Cinema.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -29,7 +29,7 @@ namespace CinemaTicketApi.Controllers
         public IActionResult Login([FromBody] User user)
         {
             User? currentUser = dbContext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
-            
+
             if (currentUser == null)
             {
                 return NotFound();
@@ -61,7 +61,7 @@ namespace CinemaTicketApi.Controllers
 
         // Register User
         [HttpPost("register")]
-        public IActionResult Register([FromBody]User user)
+        public IActionResult Register([FromBody] User user)
         {
             var userExists = dbContext.Users.FirstOrDefault(u => u.Email == user.Email);
 
@@ -69,7 +69,7 @@ namespace CinemaTicketApi.Controllers
             {
                 return BadRequest("User with same email already exists");
             }
-            
+
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             return StatusCode(StatusCodes.Status201Created);

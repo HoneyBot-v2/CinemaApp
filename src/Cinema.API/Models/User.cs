@@ -1,4 +1,4 @@
-﻿namespace CinemaTicketApi.Models
+namespace Cinema.API.Models
 {
     public class User
     {

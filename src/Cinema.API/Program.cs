@@ -1,4 +1,4 @@
-using CinemaTicketApi.Data;
+using Cinema.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -52,6 +52,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+// Health checks
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<ApiDbContext>();
+
 WebApplication app = builder.Build();
 
 // Serve OpenAPI JSON and Scalar UI
@@ -62,6 +66,12 @@ app.MapScalarApiReference(options =>
     options.Title = "Cinema API";
     // options.Theme = ScalarTheme.Default; // Optional: Light, Dark, Solarized
 });
+
+// Health check endpoint
+app.MapHealthChecks("/healthz")
+    .WithName("HealthCheck")
+    .WithTags("Health")
+    .WithOpenApi();
 
 #if DEBUG
 // Debug only authentication bypass

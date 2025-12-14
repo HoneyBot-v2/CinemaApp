@@ -1,4 +1,4 @@
-﻿namespace CinemaTicketApi.Models
+namespace Cinema.API.Models
 {
     public class Movie
     {
@@ -8,7 +8,7 @@
         public DateTime ReleaseDate { get; set; }
         public string Type { get; set; }
         public string Duration { get; set; }
-        public string ImageUrl { get; set; }    
+        public string ImageUrl { get; set; }
         public ICollection<Screening> Screenings { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using CinemaTicketApi.Models;
+using Cinema.API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaTicketApi.Data
+namespace Cinema.API.Data
 {
     public class ApiDbContext : DbContext
     {
