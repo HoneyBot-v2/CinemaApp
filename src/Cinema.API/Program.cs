@@ -2,7 +2,7 @@ using Cinema.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Scalar.AspNetCore;
+using Microsoft.OpenApi.Models;
 using SQLitePCL;
 using System.Security.Claims;
 using System.Text;
@@ -21,8 +21,42 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
     });
 
-// OpenAPI document (serves /openapi/v1.json)
-builder.Services.AddOpenApi();
+// Swagger/OpenAPI
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Cinema API",
+        Version = "v1",
+        Description = "API for Cinema Ticket Booking Application"
+    });
+
+    // Add JWT Authentication to Swagger
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 // EF Core
 builder.Services.AddDbContext<ApiDbContext>(option =>
@@ -58,14 +92,16 @@ builder.Services.AddHealthChecks()
 
 WebApplication app = builder.Build();
 
-// Serve OpenAPI JSON and Scalar UI
-app.MapOpenApi(); // GET /openapi/v1.json
-
-app.MapScalarApiReference(options =>
+// Swagger UI
+if (app.Environment.IsDevelopment())
 {
-    options.Title = "Cinema API";
-    // options.Theme = ScalarTheme.Default; // Optional: Light, Dark, Solarized
-});
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Cinema API v1");
+        options.RoutePrefix = "swagger";
+    });
+}
 
 // Health check endpoint
 app.MapHealthChecks("/healthz")

@@ -3,7 +3,7 @@
     "Cinema.API": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "scalar",
+      "launchUrl": "swagger",
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5000"
     },
