@@ -40,7 +40,7 @@ namespace Cinema.API.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
-        public void GenerateSeatsForScreening(int screeningId)
+        private void GenerateSeatsForScreening(int screeningId)
         {
             int seatsPerRow = 9;
             int totalSeats = 81;
