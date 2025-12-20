@@ -8,18 +8,18 @@ namespace Cinema.MAUI.Models;
 internal class MovieDetailes
 {
     [JsonPropertyName("id")]
-    public required int Id { get; set; }
+    public int Id { get; set; }
     [JsonPropertyName("title")]
-    public required string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
     [JsonPropertyName("description")]
-    public required string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
     [JsonPropertyName("release_date")]
-    public required DateTime ReleaseDate { get; set; }
+    public DateTime ReleaseDate { get; set; }
     [JsonPropertyName("type")]
-    public required string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
     [JsonPropertyName("duration")]
-    // TODO: Change to TimeSpan
-    public required string Duration { get; set; }
+    // TODO: Change to TimeSpan?
+    public string Duration { get; set; } = string.Empty;
     [JsonPropertyName("image_url")]
-    public required string ImageUrl { get; set; }
+    public string ImageUrl { get; set; } = string.Empty;
 }

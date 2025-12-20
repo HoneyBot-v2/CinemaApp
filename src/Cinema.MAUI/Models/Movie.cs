@@ -8,9 +8,9 @@ namespace Cinema.MAUI.Models;
 internal class Movie
 {
     [JsonPropertyName("id")]
-    public required int Id { get; set; }
+    public int Id { get; set; }
     [JsonPropertyName("title")]
-    public required string Title { get; set; }
+    public string Title { get; set; } = string.Empty;
     [JsonPropertyName("image_url")]
-    public required string ImageUrl { get; set; }
+    public string ImageUrl { get; set; } = string.Empty;
 }
