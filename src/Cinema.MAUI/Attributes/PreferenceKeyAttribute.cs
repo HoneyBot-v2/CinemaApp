@@ -155,6 +155,34 @@ internal static class PreferenceHelper
     /// - If a key is missing, the property remains at its default value.
     /// - Non-primitive values are deserialized from JSON if present.
     /// </remarks>
+    /// <example>
+    /// The following example shows how to load a <c>Token</c> model whose properties
+    /// are decorated with <see cref="PreferenceKeyAttribute"/>:
+    /// <code>
+    /// using Cinema.MAUI.Attributes;
+    /// using Cinema.MAUI.Models;
+    /// 
+    /// // Load returns a new instance with any available values from Preferences.
+    /// Token token = PreferenceHelper.Load&lt;Token&gt;();
+    /// 
+    /// // Use loaded values
+    /// string accessToken = token.AccessToken;
+    /// int userId = token.UserId;
+    /// string userName = token.UserName;
+    /// 
+    /// // If you need to know whether anything was actually stored, use TryLoad:
+    /// if (PreferenceHelper.TryLoad&lt;Token&gt;(out var loadedToken))
+    /// {
+    ///     // Preferences contained at least one attributed key
+    ///     // loadedToken has values populated from storage
+    /// }
+    /// else
+    /// {
+    ///     // No attributed keys found in Preferences
+    ///     // loadedToken is a new instance with default property values
+    /// }
+    /// </code>
+    /// </example>
     public static T Load<T>() where T : new()
     {
         var result = new T();
