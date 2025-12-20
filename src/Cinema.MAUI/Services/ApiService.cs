@@ -97,4 +97,42 @@ internal class ApiService
         MovieDetailes? details = JsonSerializer.Deserialize<MovieDetailes>(jsonResponse);
         return details ?? new MovieDetailes();
     }
+
+    public static async Task<List<Screening>> GetMovieScreening(int movieId)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+
+        // Return movie screenings from API
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/screanings/by-movie/{movieId}");
+
+        // If deserialization fails, return an empty list
+        List<Screening>? screenings = JsonSerializer.Deserialize<List<Screening>>(jsonResponse);
+        return screenings ?? new List<Screening>();
+    }
+
+    public static async Task<List<Seat>> GetAllSeats(int screeningId)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+        
+        // Return seats from API
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/seats/{screeningId}");
+        
+        // If deserialization fails, return an empty list
+        List<Seat>? seats = JsonSerializer.Deserialize<List<Seat>>(jsonResponse);
+        return seats ?? new List<Seat>();
+    }
 }
