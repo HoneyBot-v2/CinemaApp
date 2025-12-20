@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -57,5 +58,43 @@ internal class ApiService
         PreferenceHelper.Save(token);
 
         return true;
+    }
+
+    public static async Task<List<Movie>> GetMovies(string movieType)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();        
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+
+        // Return movies from API with type
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/movies?movieType={movieType}");
+
+        // If deserialization fails, return an empty list
+        List<Movie>? movies = JsonSerializer.Deserialize<List<Movie>>(jsonResponse);
+        return movies ?? new List<Movie>();
+    }
+
+    public static async Task<MovieDetailes> GetMovieDetails(int movieId)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+
+        // Return movie details from API
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/movies/{movieId}");
+
+        // If deserialization fails, return an empty MovieDetailes object
+        MovieDetailes? details = JsonSerializer.Deserialize<MovieDetailes>(jsonResponse);
+        return details ?? new MovieDetailes();
     }
 }
