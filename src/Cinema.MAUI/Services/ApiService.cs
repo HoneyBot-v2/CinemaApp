@@ -135,4 +135,59 @@ internal class ApiService
         List<Seat>? seats = JsonSerializer.Deserialize<List<Seat>>(jsonResponse);
         return seats ?? new List<Seat>();
     }
+
+    public static async Task<List<Reservation>> GetReservationByUser(int userId)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+
+        // Return reservations from API
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/reservations/by-user/{userId}");
+        
+        // If deserialization fails, return an empty list
+        List<Reservation>? reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonResponse);
+        return reservations ?? new List<Reservation>();
+    }
+
+    public static async Task<ReservationResponse> ReserveSeats(int userId, int screeningId, List<int> seatIds)
+    {
+        // Load token from preferences
+        Token token = PreferenceHelper.Load<Token>();
+        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        {
+            throw new InvalidOperationException("Missing access token. Please log in.");
+        }
+
+        // TODO: Use a bitmask instead for more fun. ;)
+        //
+        // We list letters and numbers with letters for the row and the numbers
+        // for the seat in that row can be a bit mask. Technically speaking this
+        // allows for much more scalability and will be easier to implement
+        // however if somebody reserves a seat in each row the string becomes
+        // longer. This way we parse the "seatIds" by letters with a regex, get
+        // the seat mask, then convert the mask to get the number of seats in
+        // that row. 
+        //
+        // NOTE: doint it this way is actually a valid way for the API
+        // controller to accept a list and is a good pattern when the list is
+        // small. 
+        //
+        // Build seatIds query string as the tutorial currently does
+        string seatIdsQuery = string.Join("&", seatIds.Select(id => $"seatIds={id}"));
+
+        // Return reservation response from API
+        var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/reservations/reserve/userId={userId}&screeningId={screeningId}&{seatIdsQuery}");
+
+        // If deserialization fails, return an empty ReservationResponse object
+        ReservationResponse? reservationResponse = JsonSerializer.Deserialize<ReservationResponse>(jsonResponse);
+        return reservationResponse ?? new ReservationResponse();
+    }
 }

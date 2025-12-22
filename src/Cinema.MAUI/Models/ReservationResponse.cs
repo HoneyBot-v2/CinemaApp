@@ -8,13 +8,13 @@ namespace Cinema.MAUI.Models;
 internal class ReservationResponse
 {
     [JsonPropertyName("movie_id")]
-    public required int MovieId { get; set; }
+    public int MovieId { get; set; }
     [JsonPropertyName("movie_name")]
-    public required string MovieName { get; set; }
+    public string MovieName { get; set; } = string.Empty;
     [JsonPropertyName("screening_date")]
-    public required DateTime ScreeningDate { get; set; }
+    public DateTime ScreeningDate { get; set; }
     [JsonPropertyName("seats")]
-    public required List<string> Seats { get; set; }
+    public List<string> Seats { get; set; } = new List<string>();
     [JsonPropertyName("amount")]
-    public required decimal Amount { get; set; }
+    public decimal Amount { get; set; }
 }
