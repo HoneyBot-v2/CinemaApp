@@ -24,7 +24,7 @@ internal class ApiService
         HttpClient httpClient = new HttpClient();
         string json = System.Text.Json.JsonSerializer.Serialize(register);
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-        HttpResponseMessage response = httpClient.PostAsync($"{AppSettings.ApiUrl}/users/register", content).Result;
+        HttpResponseMessage response = httpClient.PostAsync($"{AppSettings.HttpApiUrl}/users/register", content).Result;
 
         return response.IsSuccessStatusCode;
     }
@@ -40,7 +40,7 @@ internal class ApiService
         HttpClient httpClient = new HttpClient();
         string json = System.Text.Json.JsonSerializer.Serialize(login);
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-        HttpResponseMessage response = await httpClient.PostAsync($"{AppSettings.ApiUrl}/users/login", content);
+        HttpResponseMessage response = await httpClient.PostAsync($"{AppSettings.HttpsApiUrl}/users/login", content);
 
         if (!response.IsSuccessStatusCode)
         {
@@ -72,7 +72,7 @@ internal class ApiService
         // Return movies from API with type
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/movies?movieType={movieType}");
+        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/movies?movieType={movieType}");
 
         // If deserialization fails, return an empty list
         List<Movie>? movies = JsonSerializer.Deserialize<List<Movie>>(jsonResponse);
@@ -91,7 +91,7 @@ internal class ApiService
         // Return movie details from API
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/movies/{movieId}");
+        string jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/movies/{movieId}");
 
         // If deserialization fails, return an empty MovieDetailes object
         MovieDetailes? details = JsonSerializer.Deserialize<MovieDetailes>(jsonResponse);
@@ -110,7 +110,7 @@ internal class ApiService
         // Return movie screenings from API
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/screanings/by-movie/{movieId}");
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/screanings/by-movie/{movieId}");
 
         // If deserialization fails, return an empty list
         List<Screening>? screenings = JsonSerializer.Deserialize<List<Screening>>(jsonResponse);
@@ -129,7 +129,7 @@ internal class ApiService
         // Return seats from API
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/seats/{screeningId}");
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/seats/{screeningId}");
         
         // If deserialization fails, return an empty list
         List<Seat>? seats = JsonSerializer.Deserialize<List<Seat>>(jsonResponse);
@@ -148,7 +148,7 @@ internal class ApiService
         // Return reservations from API
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/reservations/by-user/{userId}");
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/reservations/by-user/{userId}");
         
         // If deserialization fails, return an empty list
         List<Reservation>? reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonResponse);
@@ -184,7 +184,7 @@ internal class ApiService
         // Return reservation response from API
         var httpClient = new HttpClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.ApiUrl}/reservations/reserve/userId={userId}&screeningId={screeningId}&{seatIdsQuery}");
+        var jsonResponse = await httpClient.GetStringAsync($"{AppSettings.HttpsApiUrl}/reservations/reserve/userId={userId}&screeningId={screeningId}&{seatIdsQuery}");
 
         // If deserialization fails, return an empty ReservationResponse object
         ReservationResponse? reservationResponse = JsonSerializer.Deserialize<ReservationResponse>(jsonResponse);
