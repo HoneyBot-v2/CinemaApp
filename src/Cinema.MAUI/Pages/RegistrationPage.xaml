@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Cinema.MAUI.Pages.RegistrationPage"
+             Title="RegistrationPage"
+             BackgroundColor="#130B2B">
+    <VerticalStackLayout VerticalOptions="Center"
+                         Margin="20,0,20,0"
+                         Spacing="20">
+        <Image Source="cinema_icon.png"
+               HorizontalOptions="Center"
+               HeightRequest="150"
+               WidthRequest="150"/>
+        <Label Text="Create new account"
+               TextColor="White"
+               FontSize="Large"
+               HorizontalOptions="Center"/>
+        <Label Text="Please enter you information below to create a new account for using tha app."
+               TextColor="White"
+               FontSize="Small"
+               HorizontalOptions="Center"/>
+        <Entry Placeholder="Full Name"
+               x:Name="EntName"
+               TextColor="White"/>
+        <Entry Placeholder="Email"
+               x:Name="EntEmail"
+               TextColor="White"/>
+        <Entry Placeholder="Password"
+               x:Name="EntPassword"
+               TextColor="White"
+               IsPassword="True"/>
+        <Button Text="Register Now"
+                FontSize="Medium"
+                BackgroundColor="#B6116B"
+                x:Name="BtnRegister"
+                Clicked="BtnRegister_Clicked"/>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Already have an account? "
+                   FontSize="Medium"
+                   TextColor="White"/>
+            <Label Text="Sign in"
+                   FontSize="Medium"
+                   TextColor="White"/>
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer x:Name="TapLogin"/>
+            </HorizontalStackLayout.GestureRecognizers>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
