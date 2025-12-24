@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Cinema.MAUI.Services;
 
 namespace Cinema.MAUI.Pages;
@@ -17,8 +18,9 @@ public partial class RegistrationPage : ContentPage
 
             if (result)
             {
+                // navigate to login page
                 await DisplayAlertAsync("Success", "Registration successful!", "Ok");
-                await Navigation.PopAsync();
+                await Navigation.PushAsync(new LoginPage());
             }
             else
             {
@@ -39,5 +41,10 @@ public partial class RegistrationPage : ContentPage
             var msg = string.Join($"{Environment.NewLine}\u2192 ", errors);
             await DisplayAlertAsync("Error", msg, "Ok");
         }
+    }
+
+    private async void TapLogin_Tapped(object sender, TappedEventArgs e)
+    {
+        await Navigation.PushAsync(new LoginPage());
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cinema.MAUI.Pages.RegistrationPage"
+             NavigationPage.HasNavigationBar="False"
              Title="RegistrationPage"
              BackgroundColor="#130B2B">
     <VerticalStackLayout VerticalOptions="Center"
@@ -42,7 +43,9 @@
                    FontSize="Medium"
                    TextColor="White"/>
             <HorizontalStackLayout.GestureRecognizers>
-                <TapGestureRecognizer x:Name="TapLogin"/>
+                <!--label controls do not support clicked events we will choose
+                the tap gesture for label controls-->
+                <TapGestureRecognizer x:Name="TapLogin" Tapped="TapLogin_Tapped"/>
             </HorizontalStackLayout.GestureRecognizers>
         </HorizontalStackLayout>
     </VerticalStackLayout>

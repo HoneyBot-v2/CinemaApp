@@ -22,7 +22,12 @@ namespace Cinema.MAUI
         // the Window for desktop and future multi-window needs.
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new RegistrationPage());
+            // This is functionally similar to: "MainPage = new NavigationPage(new RegistrationPage());"
+            // but using CreateWindow is preferred in .NET MAUI because:
+            // - It gives you direct control over the Window instance, which is important on desktop.
+            // - It enables multi-window scenarios and per-window configuration.
+            // - It provides a consistent startup path for activation, deep links, and file associations.
+            return new Window(new NavigationPage(new RegistrationPage()));
         }
     }
 }
