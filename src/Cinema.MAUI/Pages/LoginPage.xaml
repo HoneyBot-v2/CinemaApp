@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="Cinema.MAUI.Pages.LoginPage"
+             Title="LoginPage"
+             BackgroundColor="#130B2B">
+    <VerticalStackLayout VerticalOptions="Center"
+                         Margin="20,0,20,0"
+                         Spacing="20">
+        <Image Source="cinema_icon"
+               HorizontalOptions="Center"
+               HeightRequest="150"
+               WidthRequest="150"/>
+        <Label Text="Welcome Back!"
+               TextColor="White"
+               FontSize="Large"
+               HorizontalOptions="Center"/>
+        <Label Text="Please enter your email below to start using the app."
+               TextColor="White"
+               HorizontalOptions="Center"/>
+        <Entry Placeholder="Email"
+               x:Name="EntEmail"
+               TextColor="White"/>
+        <Entry Placeholder="Password"
+               x:Name="EntPassword"
+               TextColor="White"
+               IsPassword="True"/>
+        <Button Text="Sign In"
+                HeightRequest="50"
+                BackgroundColor="#B6116B"
+                x:Name="BtnLogin"
+                Clicked="BtnLogin_Clicked"/>
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Label Text="Not a member? "
+                   FontSize="Medium"
+                   TextColor="White"/>
+            <Label Text="Join now"
+                   FontSize="Medium"
+                   TextColor="White"/>
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer x:Name="TapGester" Tapped="TapGester_Tapped"/>
+            </HorizontalStackLayout.GestureRecognizers>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>
