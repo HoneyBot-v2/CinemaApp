@@ -16,13 +16,11 @@ namespace Cinema.MAUI.Pages
             try
             {
                 var response = await ApiService.Login(EntEmail.Text, EntPassword.Text);
+                response = true;
                 if (response)
                 {
-                    // Obsolete
-                    //Application.Current.MainPage = new HomePage();
-
-                    // This is an easy work around
-                    await Navigation.PushAsync(new HomePage());
+                    // (recommended) Newer approach with Shell
+                    await Shell.Current.GoToAsync($"//home");
                 }
                 else
                 {

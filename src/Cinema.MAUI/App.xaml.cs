@@ -1,5 +1,7 @@
 ﻿using Cinema.MAUI.Pages;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
 
 namespace Cinema.MAUI
 {
@@ -12,7 +14,7 @@ namespace Cinema.MAUI
 
         // We override CreateWindow instead of setting MainPage to:
         // - control the actual Window instance (needed for desktop platforms)
-        // - enable window-specific configuration and multi-window scenarios
+        // - enable multi-window scenarios
         // - handle activation/deep-link/file-association startup paths
         //   consistently
         //
@@ -27,7 +29,8 @@ namespace Cinema.MAUI
             // - It gives you direct control over the Window instance, which is important on desktop.
             // - It enables multi-window scenarios and per-window configuration.
             // - It provides a consistent startup path for activation, deep links, and file associations.
-            return new Window(new NavigationPage(new RegistrationPage()));
+            // Use Shell as the app root so Shell.Current is available
+            return new Window(new AppShell());
         }
     }
 }

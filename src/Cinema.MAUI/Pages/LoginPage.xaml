@@ -4,7 +4,9 @@
              NavigationPage.HasNavigationBar="False"
              x:Class="Cinema.MAUI.Pages.LoginPage"
              Title="LoginPage"
-             BackgroundColor="#130B2B">
+             BackgroundColor="#130B2B"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
     <VerticalStackLayout VerticalOptions="Center"
                          Margin="20,0,20,0"
                          Spacing="20">

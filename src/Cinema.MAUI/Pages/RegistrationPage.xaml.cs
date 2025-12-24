@@ -18,9 +18,8 @@ public partial class RegistrationPage : ContentPage
 
             if (result)
             {
-                // navigate to login page
-                await DisplayAlertAsync("Success", "Registration successful!", "Ok");
-                await Navigation.PushAsync(new LoginPage());
+                // (recommended) Newer approach with Shell
+                await Shell.Current.GoToAsync("//login");
             }
             else
             {
@@ -45,6 +44,6 @@ public partial class RegistrationPage : ContentPage
 
     private async void TapLogin_Tapped(object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new LoginPage());
+        await Shell.Current.GoToAsync("login");
     }
 }
