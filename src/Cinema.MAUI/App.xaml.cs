@@ -1,4 +1,5 @@
-﻿using Cinema.MAUI.Pages;
+﻿using Cinema.MAUI.Attributes;
+using Cinema.MAUI.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
@@ -9,7 +10,7 @@ namespace Cinema.MAUI
     {
         public App()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         // We override CreateWindow instead of setting MainPage to:
