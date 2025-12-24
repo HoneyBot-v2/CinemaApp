@@ -3,12 +3,27 @@
     x:Class="Cinema.MAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Cinema.MAUI"
-    Title="Cinema.MAUI">
+    xmlns:local="clr-namespace:Cinema.MAUI.Pages"
+    Title="Cinema.MAUI"
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#130B2B"
+    Shell.TabBarTitleColor="#B6116B"
+    Shell.TabBarUnselectedColor="White"
+    Shell.TabBarForegroundColor="#B6116B">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- Registration is the initial item (no flicker) -->
+    <ShellContent Route="registration" ContentTemplate="{DataTemplate local:RegistrationPage}"/>
 
+    <!-- Define the TabBar with three tabs: Home, Tickets, and Profile -->
+    <TabBar>
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent Route="home" ContentTemplate="{DataTemplate local:HomePage}"/>
+        </Tab>
+        <Tab Title="Tickets" Icon="ticket.png">
+            <ShellContent Route="tickets" ContentTemplate="{DataTemplate local:TicketsPage}"/>
+        </Tab>
+        <Tab Title="Profile" Icon="profile.png">
+            <ShellContent Route="profile" ContentTemplate="{DataTemplate local:ProfilePage}"/>
+        </Tab>
+    </TabBar>
 </Shell>
