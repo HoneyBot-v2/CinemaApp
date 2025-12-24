@@ -16,7 +16,7 @@ namespace Cinema.MAUI.Pages
             try
             {
                 var response = await ApiService.Login(EntEmail.Text, EntPassword.Text);
-                response = true;
+
                 if (response)
                 {
                     // (recommended) Newer approach with Shell
