@@ -31,4 +31,9 @@ internal class Token
     [JsonPropertyName("user_name")]
     [PreferenceKey("cinema.auth.user_name")]
     public string UserName { get; init; } = string.Empty;
+
+    public bool Validate()
+    {
+        return !(string.IsNullOrWhiteSpace(AccessToken) || string.IsNullOrWhiteSpace(UserName));
+    }
 }

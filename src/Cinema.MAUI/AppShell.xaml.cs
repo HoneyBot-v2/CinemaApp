@@ -16,9 +16,9 @@ namespace Cinema.MAUI
             Models.Token tok = PreferenceHelper.Load<Models.Token>();
             string firstPage = string.Empty;
 
-            if (!string.IsNullOrEmpty(tok.AccessToken))
+            if (tok.Validate())
             {
-                firstPage = "//home";
+                firstPage = "//home";                
             }
             else
             {
