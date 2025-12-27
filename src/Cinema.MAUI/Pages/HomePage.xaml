@@ -34,8 +34,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout WidthRequest="110">
-                            <Image HeightRequest="120" WidthRequest="100" Aspect="AspectFill"/>
-                            <Label LineBreakMode="WordWrap" MaxLines="2" HorizontalTextAlignment="Center" TextColor="White"/>
+                            <Image HeightRequest="120" WidthRequest="100" Aspect="AspectFill" Source="{Binding ImageUrl}"/>
+                            <Label LineBreakMode="WordWrap" MaxLines="2" HorizontalTextAlignment="Center" TextColor="White" Text="{Binding Title}"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
@@ -43,7 +43,7 @@
         </VerticalStackLayout>
         <!-- Latest Movies -->
         <VerticalStackLayout Grid.Row="3" Margin="5,20,10,0">
-            <Label Text="Upcoming" FontSize="Medium" Margin="0,10,0,0" TextColor="White"/>
+            <Label Text="Latest" FontSize="Medium" Margin="0,10,0,0" TextColor="White"/>
             <CollectionView x:Name="CvLatest" Margin="0,10,0,0" SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
@@ -51,8 +51,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <VerticalStackLayout WidthRequest="110">
-                            <Image HeightRequest="120" WidthRequest="100" Aspect="AspectFill"/>
-                            <Label LineBreakMode="WordWrap" MaxLines="2" HorizontalTextAlignment="Center" TextColor="White"/>
+                            <Image HeightRequest="120" WidthRequest="100" Aspect="AspectFill" Source="{Binding ImageUrl}"/>
+                            <Label LineBreakMode="WordWrap" MaxLines="2" HorizontalTextAlignment="Center" TextColor="White" Text="{Binding Title}"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
