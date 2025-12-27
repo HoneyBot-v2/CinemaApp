@@ -9,6 +9,7 @@ namespace Cinema.API.Models
         public string Type { get; set; }
         public string Duration { get; set; }
         public string ImageUrl { get; set; }
+        public string TmdbPosterPath { get; set; }
         public ICollection<Screening> Screenings { get; set; }
     }
 }

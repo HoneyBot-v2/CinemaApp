@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -17,14 +17,15 @@ namespace Cinema.API.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    ReleaseDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: false),
+                    Duration = table.Column<string>(type: "TEXT", nullable: false),
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    TmdbPosterPath = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,11 +36,11 @@ namespace Cinema.API.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,11 +51,11 @@ namespace Cinema.API.Migrations
                 name: "Screenings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ScreeningTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PricePerSeat = table.Column<int>(type: "int", nullable: false),
-                    MovieId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ScreeningTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    PricePerSeat = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovieId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -71,13 +72,13 @@ namespace Cinema.API.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ReservationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumberofSeats = table.Column<int>(type: "int", nullable: false),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ScreeningId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ReservationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    NumberofSeats = table.Column<int>(type: "INTEGER", nullable: false),
+                    Amount = table.Column<int>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ScreeningId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -100,12 +101,12 @@ namespace Cinema.API.Migrations
                 name: "Seats",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Row = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SeatNumber = table.Column<int>(type: "int", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
-                    ScreeningId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Row = table.Column<string>(type: "TEXT", nullable: false),
+                    SeatNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ScreeningId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -122,8 +123,8 @@ namespace Cinema.API.Migrations
                 name: "ReservationSeats",
                 columns: table => new
                 {
-                    ReservationId = table.Column<int>(type: "int", nullable: false),
-                    SeatId = table.Column<int>(type: "int", nullable: false)
+                    ReservationId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SeatId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,29 +140,29 @@ namespace Cinema.API.Migrations
                         column: x => x.SeatId,
                         principalTable: "Seats",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Movies",
-                columns: new[] { "Id", "Description", "Duration", "ImageUrl", "ReleaseDate", "Title", "Type" },
+                columns: new[] { "Id", "Description", "Duration", "ImageUrl", "ReleaseDate", "Title", "TmdbPosterPath", "Type" },
                 values: new object[,]
                 {
-                    { 1, "Harry Potter, an orphaned boy, discovers that he is a wizard and attends Hogwarts School of Witchcraft and Wizardry. With the help of his friends, Ron and Hermione, he battles the dark forces led by Lord Voldemort, the dark wizard who killed his parents. As he navigates his first year at school, he learns about magic, makes new friends, and faces challenges that test his bravery and loyalty. The story explores themes of friendship, courage, and the battle between good and evil.", "2h 32m", "harrypotter.jpg", new DateTime(2001, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Harry Potter and the Sorcerer's Stone", "nowplaying" },
-                    { 2, "In a world of magic and danger, a young hobbit named Frodo Baggins inherits a powerful ring. He sets off on a quest to destroy it in the fires of Mount Doom, accompanied by a fellowship of diverse characters including elves, dwarves, and men. As they journey through Middle-earth, they face numerous challenges and battles against the dark lord Sauron, who seeks to reclaim the ring. The story delves into themes of friendship, sacrifice, and the struggle between light and darkness.", "2h 58m", "lordoftherings.jpg", new DateTime(2001, 12, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lord of the Rings: The Fellowship of the Ring", "latest" },
-                    { 3, "Dom Cobb is a skilled thief who specializes in extracting secrets from deep within the subconscious during the dream state. When he is offered a chance to have his past crimes forgiven, he must perform the impossible: planting an idea into someone's mind, a process known as inception. To accomplish this, he assembles a team of specialists, and they embark on a mind-bending journey through layered dreams, battling enemies and navigating through their own fears and insecurities. The film explores complex themes of reality, dreams, and the nature of consciousness.", "2h 28m", "inception.jpg", new DateTime(2010, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Inception", "trending" },
-                    { 4, "In a dystopian future, a computer hacker named Neo discovers the shocking truth: reality as he knows it is a simulated world created by machines that have enslaved humanity. With the help of rebels led by Morpheus and Trinity, Neo embarks on a quest to free humanity from the Matrix. Along the way, he learns about his true potential, confronts powerful adversaries, and ultimately faces the enigmatic Agent Smith. The film raises profound questions about reality, free will, and the nature of existence.", "2h 16m", "matrix.jpg", new DateTime(1999, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Matrix", "latest" },
-                    { 5, "When an alien threat looms over Earth, Nick Fury, the director of S.H.I.E.L.D., assembles a team of superheroes to protect humanity. This group includes Iron Man, Thor, Captain America, the Hulk, Black Widow, and Hawkeye. As they face internal conflicts and external battles against the powerful Loki and his alien army, the heroes must learn to work together to save the world. The film showcases action-packed sequences, witty banter, and the significance of teamwork in overcoming adversity.", "2h 23m", "avengers.jpg", new DateTime(2012, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Avengers", "nowplaying" },
-                    { 6, "In the face of an impending ecological disaster, a group of astronauts embarks on a journey through a wormhole in search of a new habitable planet. Led by former NASA pilot Cooper, the team faces the challenges of time dilation, gravity, and their emotional struggles as they grapple with the fate of humanity. The film explores deep themes of love, sacrifice, and the connection between time and space, all set against a visually stunning backdrop of distant galaxies.", "2h 49m", "interstellar.jpg", new DateTime(2014, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Interstellar", "trending" },
-                    { 7, "In Gotham City, Batman faces his greatest challenge yet with the emergence of the Joker, a criminal mastermind who seeks to unleash chaos and anarchy. As the Joker wreaks havoc, Batman must confront his own moral dilemmas and the fine line between heroism and vigilantism. With the help of Commissioner Gordon and District Attorney Harvey Dent, Batman battles not only the Joker but also his inner demons. The film delves into themes of justice, morality, and the impact of choices on society.", "2h 32m", "darkknight.jpg", new DateTime(2008, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Dark Knight", "latest" },
-                    { 8, "In a groundbreaking amusement park, genetically engineered dinosaurs roam freely, drawing in visitors from around the world. When a group of experts is invited to assess the park's safety, things take a deadly turn as the dinosaurs escape their confines. Chaos ensues as the characters must fight for survival against these magnificent yet terrifying creatures. The film explores themes of scientific ethics, nature's unpredictability, and the consequences of playing God.", "2h 7m", "jurassicpark.jpg", new DateTime(1993, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jurassic Park", "nowplaying" },
-                    { 9, "In the heart of the African savannah, a young lion cub named Simba learns about responsibility and courage as he navigates the challenges of growing up. After the tragic death of his father, Mufasa, at the hands of his uncle Scar, Simba flees, believing he is to blame. However, with the help of friends Timon and Pumbaa, he learns to embrace his true identity and return to reclaim his rightful place as king. The film is a timeless tale of family, bravery, and redemption.", "1h 58m", "lionking.jpg", new DateTime(1994, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lion King", "trending" },
-                    { 10, "In the vast ocean, Marlin, a clownfish, embarks on a perilous journey to find his son, Nemo, who has been captured by a diver. Along the way, he encounters various sea creatures, each with their own unique personality and challenges. With the help of Dory, a forgetful fish, Marlin learns to overcome his fears and embrace the adventure of life. The film beautifully illustrates themes of family, friendship, and the importance of letting go.", "1h 40m", "findingnemo.jpg", new DateTime(2003, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Finding Nemo", "latest" },
-                    { 11, "In the kingdom of Arendelle, Princess Anna sets off on a quest to find her sister Elsa, whose icy powers have trapped their land in eternal winter. Along the way, she teams up with rugged ice harvester Kristoff and his loyal reindeer Sven. Together, they face formidable challenges as they navigate treacherous terrain and battle against Elsa's fears. The film is a heartwarming tale of sisterly love and the importance of self-acceptance, featuring memorable songs and stunning animation.", "1h 42m", "frozen.jpg", new DateTime(2013, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "Frozen", "trending" },
-                    { 12, "In a world where toys come to life, Woody, a pull-string cowboy doll, feels threatened by the arrival of Buzz Lightyear, a space ranger action figure. When the two toys are accidentally left behind during a family move, they must set aside their differences and work together to find their way home. The film is a charming exploration of friendship, loyalty, and the importance of embracing one's identity, filled with humor and heartwarming moments.", "1h 21m", "toystory.jpg", new DateTime(1995, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Toy Story", "latest" },
-                    { 13, "Teenager Miles Morales becomes the Spider-Man of his reality and crosses paths with five counterparts from another dimensions to stop a threat to all realities. Together, they must embrace their powers and learn what it truly means to be a hero. The film is a visually stunning and innovative take on the superhero genre, exploring themes of identity, responsibility, and the power of teamwork.", "1h 57m", "spiderman.jpg", new DateTime(2018, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spider-Man: Into the Spider-Verse", "nowplaying" },
-                    { 14, "An ogre named Shrek embarks on a quest to rescue Princess Fiona, who is held captive by a dragon. Along the way, he encounters various fairy-tale characters and learns about friendship, love, and acceptance. The film cleverly subverts traditional fairy-tale tropes, providing humor and heart in equal measure, making it a beloved classic for audiences of all ages.", "1h 30m", "shrek.jpg", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Shrek", "trending" },
-                    { 15, "In a world where superheroes are forced to hide their powers, Bob Parr, also known as Mr. Incredible, longs for the days of saving the world. When a mysterious villain threatens the safety of the city, Bob and his family must come together to embrace their abilities and fight against evil. The film is a thrilling adventure filled with action, humor, and valuable lessons about family and self-acceptance.", "1h 55m", "incredibles.jpg", new DateTime(2004, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Incredibles", "latest" }
+                    { 1, "Harry Potter, an orphaned boy, discovers that he is a wizard and attends Hogwarts School of Witchcraft and Wizardry. With the help of his friends, Ron and Hermione, he battles the dark forces led by Lord Voldemort, the dark wizard who killed his parents. As he navigates his first year at school, he learns about magic, makes new friends, and faces challenges that test his bravery and loyalty. The story explores themes of friendship, courage, and the battle between good and evil.", "2h 32m", "harrypotter.jpg", new DateTime(2001, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Harry Potter and the Sorcerer's Stone", "https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg", "nowplaying" },
+                    { 2, "In a world of magic and danger, a young hobbit named Frodo Baggins inherits a powerful ring. He sets off on a quest to destroy it in the fires of Mount Doom, accompanied by a fellowship of diverse characters including elves, dwarves, and men. As they journey through Middle-earth, they face numerous challenges and battles against the dark lord Sauron, who seeks to reclaim the ring. The story delves into themes of friendship, sacrifice, and the struggle between light and darkness.", "2h 58m", "lordoftherings.jpg", new DateTime(2001, 12, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lord of the Rings: The Fellowship of the Ring", "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", "latest" },
+                    { 3, "Dom Cobb is a skilled thief who specializes in extracting secrets from deep within the subconscious during the dream state. When he is offered a chance to have his past crimes forgiven, he must perform the impossible: planting an idea into someone's mind, a process known as inception. To accomplish this, he assembles a team of specialists, and they embark on a mind-bending journey through layered dreams, battling enemies and navigating through their own fears and insecurities. The film explores complex themes of reality, dreams, and the nature of consciousness.", "2h 28m", "inception.jpg", new DateTime(2010, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "Inception", "https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg", "trending" },
+                    { 4, "In a dystopian future, a computer hacker named Neo discovers the shocking truth: reality as he knows it is a simulated world created by machines that have enslaved humanity. With the help of rebels led by Morpheus and Trinity, Neo embarks on a quest to free humanity from the Matrix. Along the way, he learns about his true potential, confronts powerful adversaries, and ultimately faces the enigmatic Agent Smith. The film raises profound questions about reality, free will, and the nature of existence.", "2h 16m", "matrix.jpg", new DateTime(1999, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Matrix", "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", "latest" },
+                    { 5, "When an alien threat looms over Earth, Nick Fury, the director of S.H.I.E.L.D., assembles a team of superheroes to protect humanity. This group includes Iron Man, Thor, Captain America, the Hulk, Black Widow, and Hawkeye. As they face internal conflicts and external battles against the powerful Loki and his alien army, the heroes must learn to work together to save the world. The film showcases action-packed sequences, witty banter, and the significance of teamwork in overcoming adversity.", "2h 23m", "avengers.jpg", new DateTime(2012, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Avengers", "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg", "nowplaying" },
+                    { 6, "In the face of an impending ecological disaster, a group of astronauts embarks on a journey through a wormhole in search of a new habitable planet. Led by former NASA pilot Cooper, the team faces the challenges of time dilation, gravity, and their emotional struggles as they grapple with the fate of humanity. The film explores deep themes of love, sacrifice, and the connection between time and space, all set against a visually stunning backdrop of distant galaxies.", "2h 49m", "interstellar.jpg", new DateTime(2014, 11, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Interstellar", "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", "trending" },
+                    { 7, "In Gotham City, Batman faces his greatest challenge yet with the emergence of the Joker, a criminal mastermind who seeks to unleash chaos and anarchy. As the Joker wreaks havoc, Batman must confront his own moral dilemmas and the fine line between heroism and vigilantism. With the help of Commissioner Gordon and District Attorney Harvey Dent, Batman battles not only the Joker but also his inner demons. The film delves into themes of justice, morality, and the impact of choices on society.", "2h 32m", "darkknight.jpg", new DateTime(2008, 7, 18, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Dark Knight", "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", "latest" },
+                    { 8, "In a groundbreaking amusement park, genetically engineered dinosaurs roam freely, drawing in visitors from around the world. When a group of experts is invited to assess the park's safety, things take a deadly turn as the dinosaurs escape their confines. Chaos ensues as the characters must fight for survival against these magnificent yet terrifying creatures. The film explores themes of scientific ethics, nature's unpredictability, and the consequences of playing God.", "2h 7m", "jurassicpark.jpg", new DateTime(1993, 6, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), "Jurassic Park", "https://image.tmdb.org/t/p/w500/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg", "nowplaying" },
+                    { 9, "In the heart of the African savannah, a young lion cub named Simba learns about responsibility and courage as he navigates the challenges of growing up. After the tragic death of his father, Mufasa, at the hands of his uncle Scar, Simba flees, believing he is to blame. However, with the help of friends Timon and Pumbaa, he learns to embrace his true identity and return to reclaim his rightful place as king. The film is a timeless tale of family, bravery, and redemption.", "1h 58m", "lionking.jpg", new DateTime(1994, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Lion King", "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg", "trending" },
+                    { 10, "In the vast ocean, Marlin, a clownfish, embarks on a perilous journey to find his son, Nemo, who has been captured by a diver. Along the way, he encounters various sea creatures, each with their own unique personality and challenges. With the help of Dory, a forgetful fish, Marlin learns to overcome his fears and embrace the adventure of life. The film beautifully illustrates themes of family, friendship, and the importance of letting go.", "1h 40m", "findingnemo.jpg", new DateTime(2003, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "Finding Nemo", "https://image.tmdb.org/t/p/w500/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg", "latest" },
+                    { 11, "In the kingdom of Arendelle, Princess Anna sets off on a quest to find her sister Elsa, whose icy powers have trapped their land in eternal winter. Along the way, she teams up with rugged ice harvester Kristoff and his loyal reindeer Sven. Together, they face formidable challenges as they navigate treacherous terrain and battle against Elsa's fears. The film is a heartwarming tale of sisterly love and the importance of self-acceptance, featuring memorable songs and stunning animation.", "1h 42m", "frozen.jpg", new DateTime(2013, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "Frozen", "https://image.tmdb.org/t/p/w500/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg", "trending" },
+                    { 12, "In a world where toys come to life, Woody, a pull-string cowboy doll, feels threatened by the arrival of Buzz Lightyear, a space ranger action figure. When the two toys are accidentally left behind during a family move, they must set aside their differences and work together to find their way home. The film is a charming exploration of friendship, loyalty, and the importance of embracing one's identity, filled with humor and heartwarming moments.", "1h 21m", "toystory.jpg", new DateTime(1995, 11, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Toy Story", "https://image.tmdb.org/t/p/w500/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg", "latest" },
+                    { 13, "Teenager Miles Morales becomes the Spider-Man of his reality and crosses paths with five counterparts from another dimensions to stop a threat to all realities. Together, they must embrace their powers and learn what it truly means to be a hero. The film is a visually stunning and innovative take on the superhero genre, exploring themes of identity, responsibility, and the power of teamwork.", "1h 57m", "spiderman.jpg", new DateTime(2018, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Spider-Man: Into the Spider-Verse", "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg", "nowplaying" },
+                    { 14, "An ogre named Shrek embarks on a quest to rescue Princess Fiona, who is held captive by a dragon. Along the way, he encounters various fairy-tale characters and learns about friendship, love, and acceptance. The film cleverly subverts traditional fairy-tale tropes, providing humor and heart in equal measure, making it a beloved classic for audiences of all ages.", "1h 30m", "shrek.jpg", new DateTime(2001, 5, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "Shrek", "https://image.tmdb.org/t/p/w500/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg", "trending" },
+                    { 15, "In a world where superheroes are forced to hide their powers, Bob Parr, also known as Mr. Incredible, longs for the days of saving the world. When a mysterious villain threatens the safety of the city, Bob and his family must come together to embrace their abilities and fight against evil. The film is a thrilling adventure filled with action, humor, and valuable lessons about family and self-acceptance.", "1h 55m", "incredibles.jpg", new DateTime(2004, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Incredibles", "https://image.tmdb.org/t/p/w500/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg", "latest" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,51 +181,51 @@ namespace Cinema.API.Migrations
                 columns: new[] { "Id", "MovieId", "PricePerSeat", "ScreeningTime" },
                 values: new object[,]
                 {
-                    { 1, 1, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4897) },
-                    { 2, 1, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4921) },
-                    { 3, 1, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4923) },
-                    { 4, 2, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4925) },
-                    { 5, 2, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4925) },
-                    { 6, 2, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4928) },
-                    { 7, 3, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4928) },
-                    { 8, 3, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4929) },
-                    { 9, 3, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4930) },
-                    { 10, 4, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4931) },
-                    { 11, 4, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4932) },
-                    { 12, 4, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4933) },
-                    { 13, 5, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4934) },
-                    { 14, 5, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4934) },
-                    { 15, 5, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4935) },
-                    { 16, 6, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4936) },
-                    { 17, 6, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4936) },
-                    { 18, 6, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4938) },
-                    { 19, 7, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4939) },
-                    { 20, 7, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4939) },
-                    { 21, 7, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4940) },
-                    { 22, 8, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4940) },
-                    { 23, 8, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4941) },
-                    { 24, 8, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4942) },
-                    { 25, 9, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4942) },
-                    { 26, 9, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4943) },
-                    { 27, 9, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4944) },
-                    { 28, 10, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4944) },
-                    { 29, 10, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4945) },
-                    { 30, 10, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4945) },
-                    { 31, 11, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4946) },
-                    { 32, 11, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4946) },
-                    { 33, 11, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4947) },
-                    { 34, 12, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4949) },
-                    { 35, 12, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4950) },
-                    { 36, 12, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4950) },
-                    { 37, 13, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4951) },
-                    { 38, 13, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4951) },
-                    { 39, 13, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4952) },
-                    { 40, 14, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4952) },
-                    { 41, 14, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4953) },
-                    { 42, 14, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4954) },
-                    { 43, 15, 10, new DateTime(2025, 1, 19, 20, 23, 48, 475, DateTimeKind.Local).AddTicks(4954) },
-                    { 44, 15, 12, new DateTime(2025, 1, 19, 23, 23, 48, 475, DateTimeKind.Local).AddTicks(4955) },
-                    { 45, 15, 15, new DateTime(2025, 1, 20, 2, 23, 48, 475, DateTimeKind.Local).AddTicks(4955) }
+                    { 1, 1, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 2, 1, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 3, 1, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 4, 2, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 5, 2, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 6, 2, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 7, 3, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 8, 3, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 9, 3, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 10, 4, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 11, 4, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 12, 4, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 13, 5, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 14, 5, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 15, 5, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 16, 6, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 17, 6, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 18, 6, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 19, 7, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 20, 7, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 21, 7, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 22, 8, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 23, 8, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 24, 8, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 25, 9, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 26, 9, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 27, 9, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 28, 10, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 29, 10, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 30, 10, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 31, 11, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 32, 11, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 33, 11, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 34, 12, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 35, 12, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 36, 12, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 37, 13, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 38, 13, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 39, 13, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 40, 14, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 41, 14, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 42, 14, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) },
+                    { 43, 15, 10, new DateTime(2024, 1, 1, 14, 0, 0, 0, DateTimeKind.Utc) },
+                    { 44, 15, 12, new DateTime(2024, 1, 1, 17, 0, 0, 0, DateTimeKind.Utc) },
+                    { 45, 15, 15, new DateTime(2024, 1, 1, 20, 0, 0, 0, DateTimeKind.Utc) }
                 });
 
             migrationBuilder.InsertData(
