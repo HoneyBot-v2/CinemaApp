@@ -11,6 +11,6 @@ internal class Movie
     public int Id { get; set; }
     [JsonPropertyName("title")]
     public string Title { get; set; } = string.Empty;
-    [JsonPropertyName("image_url")]
+    [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; } = string.Empty;
 }

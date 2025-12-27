@@ -16,7 +16,7 @@
             </CarouselView.ItemsLayout>
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Image Aspect="Fill">
+                    <Image Aspect="Fill" Source="{Binding ImageUrl}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer />
                         </Image.GestureRecognizers>
