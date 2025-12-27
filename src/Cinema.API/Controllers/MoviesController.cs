@@ -24,7 +24,7 @@ namespace Cinema.API.Controllers
         public async Task<ActionResult<object>> GetAllMovies(string movieType)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-            var moviesQuery = dbContext.Movies.AsQueryable();
+            IQueryable<Movie> moviesQuery = dbContext.Movies.AsQueryable();
 
             if (movieType == "nowplaying")
             {
@@ -49,7 +49,9 @@ namespace Cinema.API.Controllers
             {
                 Id = m.Id,
                 Title = m.Title,
-                ImageUrl = $"{baseUrl}/{m.ImageUrl}"
+                ImageUrl = m.TmdbPosterPath
+                //ImageUrl = $"{baseUrl}/{m.ImageUrl}"
+                //ImageUrl = @"https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg?20170322172828"
 
             }).ToListAsync();
 

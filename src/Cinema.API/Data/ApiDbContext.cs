@@ -37,7 +37,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2001, 11, 16),
                     Type = "nowplaying",
                     Duration = "2h 32m",
-                    ImageUrl = "harrypotter.jpg"
+                    ImageUrl = "harrypotter.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg"
                 },
                 new Movie
                 {
@@ -47,7 +48,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2001, 12, 19),
                     Type = "latest",
                     Duration = "2h 58m",
-                    ImageUrl = "lordoftherings.jpg"
+                    ImageUrl = "lordoftherings.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg"
                 },
                 new Movie
                 {
@@ -57,7 +59,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2010, 7, 16),
                     Type = "trending",
                     Duration = "2h 28m",
-                    ImageUrl = "inception.jpg"
+                    ImageUrl = "inception.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg"
                 },
                 new Movie
                 {
@@ -67,7 +70,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(1999, 3, 31),
                     Type = "latest",
                     Duration = "2h 16m",
-                    ImageUrl = "matrix.jpg"
+                    ImageUrl = "matrix.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
                 },
                 new Movie
                 {
@@ -77,7 +81,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2012, 5, 4),
                     Type = "nowplaying",
                     Duration = "2h 23m",
-                    ImageUrl = "avengers.jpg"
+                    ImageUrl = "avengers.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg"
                 },
                 new Movie
                 {
@@ -87,7 +92,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2014, 11, 7),
                     Type = "trending",
                     Duration = "2h 49m",
-                    ImageUrl = "interstellar.jpg"
+                    ImageUrl = "interstellar.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg"
                 },
                 new Movie
                 {
@@ -97,7 +103,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2008, 7, 18),
                     Type = "latest",
                     Duration = "2h 32m",
-                    ImageUrl = "darkknight.jpg"
+                    ImageUrl = "darkknight.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
                 },
                 new Movie
                 {
@@ -107,7 +114,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(1993, 6, 11),
                     Type = "nowplaying",
                     Duration = "2h 7m",
-                    ImageUrl = "jurassicpark.jpg"
+                    ImageUrl = "jurassicpark.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/oU7Oq2kFAAlGqbU4VoAE36g4hoI.jpg"
                 },
                 new Movie
                 {
@@ -117,7 +125,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(1994, 6, 15),
                     Type = "trending",
                     Duration = "1h 58m",
-                    ImageUrl = "lionking.jpg"
+                    ImageUrl = "lionking.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg"
                 },
                 new Movie
                 {
@@ -127,7 +136,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2003, 5, 30),
                     Type = "latest",
                     Duration = "1h 40m",
-                    ImageUrl = "findingnemo.jpg"
+                    ImageUrl = "findingnemo.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg"
                 },
                 new Movie
                 {
@@ -137,7 +147,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2013, 11, 27),
                     Type = "trending",
                     Duration = "1h 42m",
-                    ImageUrl = "frozen.jpg"
+                    ImageUrl = "frozen.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg"
                 },
                 new Movie
                 {
@@ -147,7 +158,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(1995, 11, 22),
                     Type = "latest",
                     Duration = "1h 21m",
-                    ImageUrl = "toystory.jpg"
+                    ImageUrl = "toystory.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg"
                 },
                 new Movie
                 {
@@ -157,7 +169,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2018, 12, 14),
                     Type = "nowplaying",
                     Duration = "1h 57m",
-                    ImageUrl = "spiderman.jpg"
+                    ImageUrl = "spiderman.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg"
                 },
                 new Movie
                 {
@@ -167,7 +180,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2001, 5, 22),
                     Type = "trending",
                     Duration = "1h 30m",
-                    ImageUrl = "shrek.jpg"
+                    ImageUrl = "shrek.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/iB64vpL3dIObOtMZgX3RqdVdQDc.jpg"
                 },
                 new Movie
                 {
@@ -177,7 +191,8 @@ namespace Cinema.API.Data
                     ReleaseDate = new DateTime(2004, 11, 5),
                     Type = "latest",
                     Duration = "1h 55m",
-                    ImageUrl = "incredibles.jpg"
+                    ImageUrl = "incredibles.jpg",
+                    TmdbPosterPath = "https://image.tmdb.org/t/p/w500/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg"
                 }
             );
 
@@ -185,11 +200,14 @@ namespace Cinema.API.Data
             var screenings = new List<Screening>();
             int screeningIdCounter = 1;
 
+            // Use deterministic static times to avoid non-deterministic model changes in migrations
+            var baseTime = new DateTime(2024, 01, 01, 12, 00, 00, DateTimeKind.Utc);
+
             for (int movieId = 1; movieId <= 15; movieId++)
             {
-                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = DateTime.Now.AddHours(2), PricePerSeat = 10, MovieId = movieId });
-                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = DateTime.Now.AddHours(5), PricePerSeat = 12, MovieId = movieId });
-                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = DateTime.Now.AddHours(8), PricePerSeat = 15, MovieId = movieId });
+                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = baseTime.AddHours(2), PricePerSeat = 10, MovieId = movieId });
+                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = baseTime.AddHours(5), PricePerSeat = 12, MovieId = movieId });
+                screenings.Add(new Screening { Id = screeningIdCounter++, ScreeningTime = baseTime.AddHours(8), PricePerSeat = 15, MovieId = movieId });
             }
 
             modelBuilder.Entity<Screening>().HasData(screenings);

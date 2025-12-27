@@ -150,7 +150,7 @@ app.Use(async (context, next) =>
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApiDbContext>();
-    db.Database.EnsureCreated();
+    //db.Database.EnsureCreated();
     // if you use migrations
     //db.Database.Migrate();
 }
