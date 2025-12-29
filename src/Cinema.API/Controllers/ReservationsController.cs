@@ -39,7 +39,6 @@ namespace Cinema.API.Controllers
                 .ThenInclude(s => s.Movie)
                 .ToList();
 
-
             // Transform the reservations into the new DTO format
             var response = reservations.Select(r => new ReservationResponseDto
             {
@@ -109,10 +108,10 @@ namespace Cinema.API.Controllers
                                          // Prepare the response object
                 var response = new
                 {
-                    MovieId = screening.Movie.Id,          // Assuming Movie entity has an Id property
-                    MovieName = screening.Movie.Title,      // Assuming Movie entity has a Name property
-                    ScreeningDate = screening.ScreeningTime,        // Assuming Screening has a Date property
-                    Seats = string.Join(",", seats.Select(s => s.Row + s.SeatNumber)),
+                    MovieId = screening.Movie.Id,                          // Assuming Movie entity has an Id property
+                    MovieName = screening.Movie.Title,                       // Assuming Movie entity has a Title property
+                    ScreeningDate = screening.ScreeningTime,                     // Assuming Screening has a ScreeningTime property
+                    Seats = seats.Select(s => $"{s.Row}{s.SeatNumber}"), // List of seat identifiers
                     Amount = totalAmount,
                 };
 
