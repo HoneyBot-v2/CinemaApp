@@ -22,15 +22,16 @@
                        FontSize="16" 
                        TextColor="White" 
                        LineBreakMode="TailTruncation" 
-                       MaxLines="3"/>
+                       />
                 <Label x:Name="LblReadMore" 
                        Text="Read More" 
                        TextColor="White" 
                        FontAttributes="Bold" 
                        HorizontalOptions="End" 
-                       VerticalOptions="End">
+                       VerticalOptions="End"
+                       >
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer/>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                     </Label.GestureRecognizers>
                 </Label>
             </VerticalStackLayout>
