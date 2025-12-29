@@ -11,9 +11,6 @@
     Shell.TabBarUnselectedColor="White"
     Shell.TabBarForegroundColor="#B6116B">
 
-    <!-- Registration is the initial item (no flicker) -->
-    <!--<ShellContent Route="registration" ContentTemplate="{DataTemplate local:RegistrationPage}"/>-->
-
     <!-- Define the TabBar with three tabs: Home, Tickets, and Profile -->
     <TabBar>
         <Tab Title="Home" Icon="home.png">

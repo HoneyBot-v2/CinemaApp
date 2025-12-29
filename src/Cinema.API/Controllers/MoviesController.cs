@@ -73,7 +73,8 @@ namespace Cinema.API.Controllers
                     ReleaseDate = m.ReleaseDate,
                     Type = m.Type,
                     Duration = m.Duration,
-                    ImageUrl = $"{baseUrl}/{m.ImageUrl}"
+                    ImageUrl = m.TmdbPosterPath
+                    //ImageUrl = $"{baseUrl}/{m.ImageUrl}"
                 })
                 .FirstOrDefaultAsync();
 

@@ -30,7 +30,7 @@ namespace Cinema.MAUI.Pages
             catch (Exception ex)
             {
                 var errors = new List<string>();
-                for (var i = 0; i < 2; i++)
+                for (var i = 0; i < 10; i++)
                 {
                     if (ex == null)
                     {
