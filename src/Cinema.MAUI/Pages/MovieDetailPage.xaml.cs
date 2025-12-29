@@ -9,20 +9,20 @@ public partial class MovieDetailPage : ContentPage
     private Screening _screening;
 
     public MovieDetailPage(int id)
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         // Show only 3 lines of description initially
         LblMovieDescription.MaxLines = 3;
-		MovieDetail(id);
+        MovieDetail(id);
         MovieScreening(id);
-	}
+    }
 
     private async void MovieDetail(int id)
     {
         MovieDetailes movie = await ApiService.GetMovieDetails(id);
-		ImgMovie.Source = movie.ImageUrl;
-		LblMovieDescription.Text = movie.Description;
-		LblMovieTitle.Text = movie.Title;
+        ImgMovie.Source = movie.ImageUrl;
+        LblMovieDescription.Text = movie.Description;
+        LblMovieTitle.Text = movie.Title;
     }
 
     private async void ImgBtnBack_Clicked(object sender, EventArgs e)
@@ -52,12 +52,11 @@ public partial class MovieDetailPage : ContentPage
     {
         if (_screening != null)
         {
-            // Cource uses:
-            // Navigation.PushModalAsync(new SeatsPage());
-
-            // We use Shell navigation with query parameters instead which gives
-            // us this:
-            await Shell.Current.GoToAsync($"seats?screaningId={_screening.Id}");
+            // With Shell navigation, pass the selected screening as a query parameter
+            await Shell.Current.GoToAsync($"seats", new Dictionary<string, object>
+            {
+                [nameof(Screening)] = _screening
+            });
             return;
         }
 
