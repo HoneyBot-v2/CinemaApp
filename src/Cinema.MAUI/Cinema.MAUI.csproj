@@ -72,6 +72,9 @@
 		<MauiXaml Update="Pages\RegistrationPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="Pages\SeatsPage.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="Pages\TicketsPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>

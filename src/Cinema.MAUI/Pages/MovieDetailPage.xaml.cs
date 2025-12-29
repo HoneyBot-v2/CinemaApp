@@ -6,12 +6,15 @@ namespace Cinema.MAUI.Pages;
 public partial class MovieDetailPage : ContentPage
 {
     private bool _isDescriptionExpanded = false;
+    private Screening _screening;
+
     public MovieDetailPage(int id)
 	{
 		InitializeComponent();
-		MovieDetail(id);
         // Show only 3 lines of description initially
         LblMovieDescription.MaxLines = 3;
+		MovieDetail(id);
+        MovieScreening(id);
 	}
 
     private async void MovieDetail(int id)
@@ -28,7 +31,7 @@ public partial class MovieDetailPage : ContentPage
         await Shell.Current.GoToAsync("..");
     }
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         if (_isDescriptionExpanded)
         {
@@ -43,5 +46,38 @@ public partial class MovieDetailPage : ContentPage
             LblReadMore.Text = "Read Less";
         }
         _isDescriptionExpanded = !_isDescriptionExpanded;
+    }
+
+    private async void BtnReservation_Clicked(object sender, EventArgs e)
+    {
+        if (_screening != null)
+        {
+            // Cource uses:
+            // Navigation.PushModalAsync(new SeatsPage());
+
+            // We use Shell navigation with query parameters instead which gives
+            // us this:
+            await Shell.Current.GoToAsync($"seats?screaningId={_screening.Id}");
+            return;
+        }
+
+        await DisplayAlertAsync("Oops", "Please slect a movie time", "Ok");
+    }
+
+    private async void CvMovieScreening_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        Screening? screening = e.CurrentSelection.FirstOrDefault() as Screening;
+        if (screening == null)
+        {
+            return;
+        }
+
+        _screening = screening;
+    }
+
+    private async void MovieScreening(int id)
+    {
+        List<Screening> movieScreenings = await ApiService.GetMovieScreening(id);
+        CvMovieScreening.ItemsSource = movieScreenings;
     }
 }

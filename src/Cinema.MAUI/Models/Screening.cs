@@ -9,10 +9,10 @@ internal class Screening
 {
     [JsonPropertyName("id")]
     public required int Id { get; set; }
-    [JsonPropertyName("screening_time")]
+    [JsonPropertyName("screeningTime")]
     public required DateTime ScreeningTime { get; set; }
-    [JsonPropertyName("price_per_seat")]
+    [JsonPropertyName("pricePerSeat")]
     public required decimal PricePerSeat { get; set; }
-    [JsonPropertyName("movie_id")]
+    [JsonPropertyName("movieId")]
     public required int MovieId { get; set; }
 }
