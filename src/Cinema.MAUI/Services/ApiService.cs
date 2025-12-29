@@ -184,7 +184,7 @@ internal class ApiService
         // Return reservation response from API
         var httpClient = CreateClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"reservations/reserve/userId={userId}&screeningId={screeningId}&{seatIdsQuery}");
+        var jsonResponse = await httpClient.GetStringAsync($"reservations/reserve?userId={userId}&screeningId={screeningId}&{seatIdsQuery}");
 
         // If deserialization fails, return an empty ReservationResponse object
         ReservationResponse? reservationResponse = JsonSerializer.Deserialize<ReservationResponse>(jsonResponse);
