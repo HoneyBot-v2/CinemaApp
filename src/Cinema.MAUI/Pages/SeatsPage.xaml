@@ -2,11 +2,176 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cinema.MAUI.Pages.SeatsPage"
-             Title="SeatsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Loaded SeatsPage"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="SeatsPage"
+             BackgroundColor="#130B2B">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+          RowSpacing="20">
+        <Grid ColumnDefinitions="1*,8*,1*"
+              Grid.Row="0"
+              Padding="10">
+            <ImageButton x:Name="ImgBtnBack"
+                         Grid.Column="0"
+                         HeightRequest="40"
+                         WidthRequest="40"
+                         Source="leftbtn_icon.png"
+                         Clicked="ImgBtnBack_Clicked"/>
+            <Label Grid.Column="1"
+                   Text="Choose Seats"
+                   FontSize="Medium"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="White"/>
+        </Grid>
+        <Image Grid.Row="1"
+               HeightRequest="80"
+               Margin="10"
+               Aspect="Fill"
+               VerticalOptions="Start"
+               Source="screen_icon.png"/>
+        <ActivityIndicator x:Name="AiLoader"
+                           Grid.Row="2"
+                           IsRunning="True"
+                           IsVisible="True"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Color="White"/>
+        <CollectionView x:Name="CvSeats"
+                        Grid.Row="2"
+                        Margin="10,0,10,0"
+                        MinimumHeightRequest="200"
+                        SelectionMode="Multiple"
+                        ItemsSource="{Binding Seats}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 HorizontalItemSpacing="5"
+                                 VerticalItemSpacing="5"
+                                 Span="9"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout>
+                        <!-- Seat button: default icon is reserved; DataTriggers below will update the image based on the seat state (available/selected/reserved) from the bound item -->
+                        <ImageButton Source="seatreserved_icon.png"
+                                     HeightRequest="35"
+                                     WidthRequest="35"
+                                     BindingContext="{Binding .}"
+                                     Clicked="ImgBtn_Clicked">
+                            <ImageButton.Triggers>
+                                <!-- trigger for available seat -->
+                                <DataTrigger TargetType="ImageButton"
+                                             Binding="{Binding IsAvailable}"
+                                             Value="True">
+                                    <Setter Property="Source"
+                                            Value="seatavailable_icon.png"/>
+                                </DataTrigger>
+                                <!-- trigger for selected seat -->
+                                <DataTrigger TargetType="ImageButton"
+                                             Binding="{Binding IsSelected}"
+                                             Value="True">
+                                    <Setter Property="Source"
+                                            Value="seatselected_icon.png"/>
+                                </DataTrigger>
+                                <!-- trigger for unavailable seat -->
+                                <DataTrigger TargetType="ImageButton"
+                                             Binding="{Binding IsAvailable}"
+                                             Value="False">
+                                    <Setter Property="Source"
+                                            Value="seatreserved_icon.png"/>
+                                </DataTrigger>
+                            </ImageButton.Triggers>
+                        </ImageButton>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout Grid.Row="3"
+                               Spacing="30"
+                               HorizontalOptions="Center">
+            <HorizontalStackLayout Spacing="5">
+                <Border Stroke="#C4C4C4"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectange 30,30,30,30"
+                        Background="#C4C4C4"
+                        Padding="8"
+                        HorizontalOptions="Center"/>
+                <Label Text="Available"
+                       TextColor="White"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Border Stroke="#B6116B"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangel 30,30,30,30"
+                        Background="#B6116b"
+                        Padding="8"
+                        HorizontalOptions="Center"/>
+                <Label Text="Reserved"
+                       TextColor="White"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Border Stroke="#09FBD3"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 30,30,30,30"
+                    Background="#09FBD3"
+                    Padding="8"
+                    HorizontalOptions="Center"/>
+                <Label Text="Selected"
+                   TextColor="White"/>
+            </HorizontalStackLayout>
+        </HorizontalStackLayout>
+        <Grid Grid.Row="4"
+              VerticalOptions="Center"
+              Margin="0"
+              ColumnDefinitions="7*,3*">
+            <VerticalStackLayout Grid.Column="0"
+                                 Margin="30,0,0,0"
+                                 Spacing="25">
+                <HorizontalStackLayout Spacing="5">
+                    <Image HeightRequest="25"
+                           WidthRequest="25"
+                           VerticalOptions="Center"
+                           Source="ticket_icon.png"/>
+                    <Label x:Name="LblSeatNumber"
+                           VerticalOptions="Center"
+                           Text="No seats selected"
+                           TextColor="WHite"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Image HeightRequest="25"
+                           WidthRequest="25"
+                           VerticalOptions="Center"
+                           Source="buy_icon.png"/>
+                    <Label x:Name="LblTicketPrice"
+                           VerticalOptions="Center"
+                           Text="Total: $0.00"
+                           TextColor="White"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            <Border Stroke="#FE53BB"
+                    Margin="0,0,0,0"
+                    Grid.Column="1"
+                    StrokeThickness="5"
+                    StrokeShape="RoundRectangle 60,0,60,0"
+                    Background="#FE53BB"
+                    Padding="15,15,20,15"
+                    HorizontalOptions="Center">
+                <Frame BorderColor="#09FBD3"
+                       BackgroundColor="Grey"
+                       HasShadow="True"
+                       CornerRadius="40"
+                       VerticalOptions="Center"
+                       HeightRequest="80"
+                       WidthRequest="80">
+                    <Label Text="Buy"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer x:Name="TapBuy" Tapped="TapBuy_Tapped"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Border>
+        </Grid>
+    </Grid>
 </ContentPage>
