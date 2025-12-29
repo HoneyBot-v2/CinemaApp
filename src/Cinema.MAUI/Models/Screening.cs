@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Cinema.MAUI.Models;
 
-internal class Screening
+public class Screening
 {
     [JsonPropertyName("id")]
     public required int Id { get; set; }
