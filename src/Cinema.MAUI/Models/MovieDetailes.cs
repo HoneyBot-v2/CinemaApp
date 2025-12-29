@@ -13,13 +13,13 @@ internal class MovieDetailes
     public string Title { get; set; } = string.Empty;
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
-    [JsonPropertyName("release_date")]
+    [JsonPropertyName("releaseDate")]
     public DateTime ReleaseDate { get; set; }
     [JsonPropertyName("type")]
     public string Type { get; set; } = string.Empty;
     [JsonPropertyName("duration")]
     // TODO: Change to TimeSpan?
     public string Duration { get; set; } = string.Empty;
-    [JsonPropertyName("image_url")]
+    [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; } = string.Empty;
 }

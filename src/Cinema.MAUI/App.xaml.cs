@@ -10,7 +10,7 @@ namespace Cinema.MAUI
     {
         public App()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
 
         // We override CreateWindow instead of setting MainPage to:
@@ -25,13 +25,29 @@ namespace Cinema.MAUI
         // the Window for desktop and future multi-window needs.
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            // This is functionally similar to: "MainPage = new NavigationPage(new RegistrationPage());"
-            // but using CreateWindow is preferred in .NET MAUI because:
-            // - It gives you direct control over the Window instance, which is important on desktop.
-            // - It enables multi-window scenarios and per-window configuration.
-            // - It provides a consistent startup path for activation, deep links, and file associations.
-            // Use Shell as the app root so Shell.Current is available
-            return new Window(new AppShell());
+            var shell = new AppShell();
+            var token = PreferenceHelper.Load<Models.Token>();
+
+            // Ensure Shell is always the root so Shell.Current is non-null and
+            // routes are registered
+            var window = new Window(shell);
+
+            if (token != null && token.Validate())
+            {
+                // Authenticated: stay on default shell content (e.g., Home)
+                // Optionally navigate to a home route if needed (but this
+                // should not be needed):
+                // await shell.GoToAsync("home");
+            }
+            else
+            {
+                // Unauthenticated: navigate to registration within shell
+                // Avoid awaiting here to prevent startup flicker;
+                // fire-and-forget is acceptable during window creation.
+                _ = shell.GoToAsync("registration");
+            }
+
+            return window;
         }
     }
 }

@@ -27,7 +27,7 @@
         <!-- Now Playing -->
         <VerticalStackLayout Grid.Row="2" Margin="5,20,10,0">
             <Label Text="Upcoming" FontSize="Medium" Margin="5,0,0,0" TextColor="White"/>
-            <CollectionView x:Name="CvNowPlaying" Margin="0,10,0,0" SelectionMode="Single">
+            <CollectionView x:Name="CvNowPlaying" Margin="0,10,0,0" SelectionMode="Single" SelectionChanged="CvNowPlaying_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
@@ -44,7 +44,7 @@
         <!-- Latest Movies -->
         <VerticalStackLayout Grid.Row="3" Margin="5,20,10,0">
             <Label Text="Latest" FontSize="Medium" Margin="0,10,0,0" TextColor="White"/>
-            <CollectionView x:Name="CvLatest" Margin="0,10,0,0" SelectionMode="Single">
+            <CollectionView x:Name="CvLatest" Margin="0,10,0,0" SelectionMode="Single" SelectionChanged="CvLatest_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" ItemSpacing="5"/>
                 </CollectionView.ItemsLayout>
