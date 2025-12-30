@@ -13,6 +13,7 @@ namespace Cinema.MAUI.Services;
 
 internal class ApiService
 {
+
     public static async Task<bool> RegisterUser(string name, string email, string password)
     {
         Register register = new Register
@@ -136,19 +137,19 @@ internal class ApiService
         return seats ?? new List<Seat>();
     }
 
-    public static async Task<List<Reservation>> GetReservationByUser(int userId)
+    public static async Task<List<Reservation>> GetReservations()
     {
         // Load token from preferences
         Token token = PreferenceHelper.Load<Token>();
-        if (string.IsNullOrWhiteSpace(token.AccessToken))
+        if (!token.Validate())
         {
-            throw new InvalidOperationException("Missing access token. Please log in.");
+            throw new InvalidOperationException("Invalid token. Please log in again.");
         }
 
         // Return reservations from API
         var httpClient = CreateClient();
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token.AccessToken);
-        var jsonResponse = await httpClient.GetStringAsync($"reservations/by-user/{userId}");
+        var jsonResponse = await httpClient.GetStringAsync($"reservations/by-user/{token.UserId}");
 
         // If deserialization fails, return an empty list
         List<Reservation>? reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonResponse);

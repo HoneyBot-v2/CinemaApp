@@ -2,12 +2,65 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Cinema.MAUI.Pages.TicketsPage"
-             Title="TicketsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            Background="Yellow"/>
-    </VerticalStackLayout>
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="#130B2B">
+    <CollectionView x:Name="CvReservations"
+                    Margin="10"
+                    Grid.Row="1"
+                    SelectionMode="Single"
+                    SelectionChanged="CvReservations_SelectionChanged">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"
+                               ItemSpacing="10"/>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout Padding="10"
+                                     BackgroundColor="White"
+                                     VerticalOptions="Start">
+                    <Label Text="{Binding MovieTitle, StringFormat='Movie: {0}'}"
+                           FontAttributes="Bold"
+                           FontSize="Medium"/>
+                    <Grid RowDefinitions="Auto,Auto"
+                          ColumnDefinitions="6*,4*">
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               TextColor="Grey"
+                               Text="Date"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               Text="{Binding ReservationDate, StringFormat='{0:dd MMM}'}"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               TextColor="Grey"
+                               Text="Seat"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               TextColor="Black"
+                               Text="{Binding SeatNumbersDisplay}"/>
+                    </Grid>
+                    <Grid RowDefinitions="Auto,Auto"
+                          ColumnDefinitions="6*,4*">
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               TextColor="Grey"
+                               Text="Order Id"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               TextColor="Black"
+                               Text="{Binding Id}"/>
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               TextColor="Grey"
+                               Text="Price"/>
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               TextColor="Black"
+                               Text="{Binding Amount, StringFormat='${0:F2}'}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>
