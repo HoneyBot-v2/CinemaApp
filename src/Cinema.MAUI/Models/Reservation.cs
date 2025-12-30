@@ -5,24 +5,31 @@ using System.Text.Json.Serialization;
 
 namespace Cinema.MAUI.Models;
 
-internal class Reservation
+public class Reservation
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
-    [JsonPropertyName("reservation_date")]
+    [JsonPropertyName("reservationDate")]
     public required DateTime ReservationDate { get; set; }
-    [JsonPropertyName("number_of_seats")]
+    [JsonPropertyName("numberOfSeats")]
     public required int NumberOfSeats { get; set; }
     [JsonPropertyName("amount")]
     public required decimal Amount { get; set; }
-    [JsonPropertyName("user_id")]
+    [JsonPropertyName("userId")]
     public required int UserId { get; set; }
-    [JsonPropertyName("screening_id")]
+    [JsonPropertyName("screeningId")]
     public required int ScreeningId { get; set; }
-    [JsonPropertyName("movie_title")]
+    [JsonPropertyName("movieTitle")]
     public required string MovieTitle { get; set; }
-    [JsonPropertyName("movie_img_url")]
+    [JsonPropertyName("movieImageUrl")]
     public required string MovieImgUrl { get; set; }
-    [JsonPropertyName("seat_numbers")]
+    [JsonPropertyName("seatNumbers")]
     public required List<string> SeatNumbers { get; set; }
+    public string SeatNumbersDisplay
+    {
+        get
+        {
+            return string.Join(",", SeatNumbers);
+        }
+    }
 }
