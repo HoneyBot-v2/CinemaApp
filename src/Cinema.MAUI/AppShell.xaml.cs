@@ -8,11 +8,12 @@ namespace Cinema.MAUI
         {
             InitializeComponent();
 
+            // Initial navigation is handled in App.CreateWindow to avoid flicker.
             // Register non-visual routes
             Routing.RegisterRoute("registration", typeof(Pages.RegistrationPage));
             Routing.RegisterRoute("login", typeof(Pages.LoginPage));
             Routing.RegisterRoute("seats", typeof(Pages.SeatsPage));
-            // Initial navigation is handled in App.CreateWindow to avoid flicker.
+            Routing.RegisterRoute("ticketdetail", typeof(Pages.TicketDetailPage));
         }
     }
 }
