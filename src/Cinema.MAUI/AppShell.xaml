@@ -11,6 +11,10 @@
     Shell.TabBarUnselectedColor="White"
     Shell.TabBarForegroundColor="#B6116B">
 
+    <!-- Expose Registration as a top-level page (not a tab) -->
+    <ShellContent Route="registration" ContentTemplate="{DataTemplate local:RegistrationPage}" />
+    <ShellContent Route="login" ContentTemplate="{DataTemplate local:LoginPage}" />
+    
     <!-- Define the TabBar with three tabs: Home, Tickets, and Profile -->
     <TabBar>
         <Tab Title="Home" Icon="home.png">
