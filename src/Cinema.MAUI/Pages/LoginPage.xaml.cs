@@ -1,4 +1,5 @@
 using System;
+using Cinema.MAUI.Models;
 using Cinema.MAUI.Services;
 using Microsoft.Maui.Controls;
 
@@ -45,9 +46,9 @@ namespace Cinema.MAUI.Pages
             }
         }
 
-        private void TapGester_Tapped(object sender, TappedEventArgs e)
+        private async void TapGester_Tapped(object sender, TappedEventArgs e)
         {
-
+            await Shell.Current.GoToAsync("//registration");
         }
     }
 }

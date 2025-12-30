@@ -44,6 +44,6 @@ public partial class RegistrationPage : ContentPage
 
     private async void TapLogin_Tapped(object sender, TappedEventArgs e)
     {
-        await Shell.Current.GoToAsync("login");
+        await Shell.Current.GoToAsync("//login");
     }
 }
