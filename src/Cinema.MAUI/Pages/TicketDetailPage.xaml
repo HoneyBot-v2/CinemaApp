@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="Cinema.MAUI.Pages.TicketDetailPage"
+             BackgroundColor="#0E1E2E"
+             NavigationPage.HasNavigationBar="False"
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout Spacing="20">
+        <Grid ColumnDefinitions="1*,8*,1"
+              Grid.Row="0"
+              Padding="10"
+              >
+            <ImageButton x:Name="ImgBtnBack"
+                         Grid.Column="0"
+                         HeightRequest="40"
+                         WidthRequest="40"
+                         Source="leftbtn_icon.png"
+                         Clicked="ImgBtnBack_Clicked"/>
+            <Label Grid.Column="1"
+                   Text="Ticket"
+                   FontSize="Medium"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   TextColor="White"/>
+        </Grid>
+        <Border Padding="0"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 15"
+                Background="White"
+                HeightRequest="600"
+                Margin="40,20,40,20">
+            <VerticalStackLayout Padding="0"
+                                 VerticalOptions="Start">
+                <Image x:Name="ImgMovieUrl"
+                       Aspect="Fill"
+                       HeightRequest="200"/>
+                <Label x:Name="LblMovieTitle"
+                       Margin="0,20,0,0"
+                       Padding="10"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Grid RowDefinitions="Auto,Auto"
+                      Padding="10"
+                      Margin="0,20,0,0"
+                      ColumnDefinitions="6*,4*">
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           TextColor="Grey"
+                           Text="Date"/>
+                    <Label x:Name="LblDate"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           TextColor="Grey"
+                           Text="Seat"/>
+                    <Label x:Name="LblSeats"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+                </Grid>
+                <Grid RowDefinitions="Auto,Auto"
+                      Margin="0,20,0,0"
+                      Padding="10"
+                      ColumnDefinitions="6*,4*">
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           TextColor="Grey"
+                           Text="Order Id"/>
+                    <Label x:Name="LblTicketId"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           TextColor="Black"
+                           FontAttributes="Bold"/>
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           TextColor="Grey"
+                           Text="Price"/>
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           TextColor="Black"
+                           FontAttributes="Bold"
+                           x:Name="LblPrice"/>
+                </Grid>
+                <Grid Margin="0,20,0,0"
+                      Padding="0"
+                      ColumnDefinitions="5*,5*">
+                    <BoxView Grid.Column="0"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             HorizontalOptions="Start"
+                             CornerRadius="0,20,0,20"
+                             Margin="-10,0,0,0"/>
+                    <BoxView Grid.Column="1"
+                             HeightRequest="30"
+                             WidthRequest="30"
+                             HorizontalOptions="End"
+                             CornerRadius="20,0,20,0"
+                             Margin="0,0,-10,0"/>
+                </Grid>
+                <zxing:BarcodeGeneratorView x:Name="BarcodeValue"
+                                            HeightRequest="100"
+                                            ForegroundColor="Black"
+                                            Format="Code128"
+                                            Margin="10,10,10,-20" />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
