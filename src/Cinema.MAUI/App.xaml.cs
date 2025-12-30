@@ -44,7 +44,7 @@ namespace Cinema.MAUI
                 // Unauthenticated: navigate to registration within shell
                 // Avoid awaiting here to prevent startup flicker;
                 // fire-and-forget is acceptable during window creation.
-                _ = shell.GoToAsync("registration");
+                _ = shell.GoToAsync("//registration");
             }
 
             return window;
