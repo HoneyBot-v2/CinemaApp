@@ -46,11 +46,11 @@ namespace Cinema.API.Controllers
                 ReservationDate = r.ReservationDate,
                 NumberOfSeats = r.NumberofSeats,
                 MovieTitle = r.Screening.Movie.Title,
-                MovieImageUrl = $"{baseUrl}/{r.Screening.Movie.ImageUrl}",
+                MovieImageUrl = r.Screening.Movie.TmdbPosterPath,
                 Amount = r.Amount,
                 UserId = r.UserId,
                 ScreeningId = r.ScreeningId,
-                SeatNumbers = string.Join(", ", r.ReservationSeats.Select(rs => $"{rs.Seat.Row}{rs.Seat.SeatNumber}"))
+                SeatNumbers = r.ReservationSeats.Select(rs => $"{rs.Seat.Row}{rs.Seat.SeatNumber}").ToList(),
             }).ToList();
 
             return Ok(response);
